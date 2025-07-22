@@ -1,1 +1,1788 @@
+        .about-card:last-child {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            justify-self: center;
+        }<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Barcelo - DevOps Engineer Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00ff88;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .hero-content-text h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content-text h2 {
+            margin-bottom: 1rem;
+        }
+
+        .hero-content-text p {
+            margin-bottom: 0;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #bbb;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #00ff88;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+        }
+
+        .code-snippet {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #00ff88;
+            font-size: 0.9rem;
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .snippet-1 { top: 20px; left: 20px; animation-delay: 0s; }
+        .snippet-2 { bottom: 60px; right: 20px; animation-delay: 2s; }
+        .snippet-3 { top: 150px; right: 80px; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            position: relative;
+            scroll-margin-top: 80px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #bbb;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .about-content-new {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            color: #00ff88;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-text {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .about-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+
+        .about-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            border: 3px solid #00ff88;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 255, 136, 0.4);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .stat-label {
+            color: #bbb;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        /* Hire Me Animation */
+        .hire-me-animation {
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hire-me-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hire-text {
+            color: #ccc;
+            font-size: 1.1rem;
+            font-weight: 500;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .hire-cta {
+            color: #00ff88;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: bounceIn 2s ease-out 0.5s both;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .hire-me-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) translateY(-5px);
+            }
+            70% {
+                transform: scale(0.95) translateY(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.1;
+            }
+        }
+
+        .hire-cta:hover {
+            animation: none;
+            transform: scale(1.05);
+            cursor: default;
+            transition: transform 0.2s ease;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            flex: 0 1 300px;
+            max-width: 400px;
+            min-width: 300px;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+        }
+
+        .skill-category h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        /* Experience Section */
+        .experience {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .resume-downloads {
+            text-align: center;
+            margin: 0 auto 4rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 900px;
+        }
+
+        .downloads-title {
+            color: #00ff88;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .resume-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 100%;
+        }
+
+        .resume-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(45deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 240px;
+            flex: 0 1 auto;
+        }
+
+        .resume-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            transition: left 0.3s ease;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+        }
+
+        .resume-btn:hover::before {
+            left: 0;
+        }
+
+        .resume-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Projects Section */
+        .projects {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .project-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            flex: 0 1 350px;
+            max-width: 400px;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .project-header {
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .project-type {
+            color: #00ff88;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-description {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .project-link.documentation {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+        }
+
+        .project-link.documentation:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .project-link.github {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+        }
+
+        .project-link.github:hover {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: #00ff88;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: calc(50% - 30px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: calc(50% + 30px);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #00ff88;
+            border-radius: 50%;
+            top: 30px;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -40px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -40px;
+        }
+
+        .timeline-date {
+            color: #00ff88;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #bbb;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .certifications {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+            min-height: 90px;
+        }
+
+        .cert-item:hover {
+            transform: translateY(-3px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.2);
+        }
+
+        .cert-icon {
+            min-width: 60px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+
+        .cert-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: brightness(1.2);
+        }
+
+        .cert-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cert-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+            line-height: 1.3;
+            word-wrap: break-word;
+        }
+
+        .cert-status {
+            color: #00ff88;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .certified {
+            color: #00d4ff !important;
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .testimonial-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            flex: 0 1 350px;
+            max-width: 400px;
+            min-width: 300px;
+        }
+
+        .testimonial-text {
+            color: #ccc;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 1.2rem 2.5rem;
+            border: 2px solid rgba(0, 116, 187, 0.5);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: rgba(0, 116, 187, 0.1);
+        }
+
+        .contact-link.linkedin:hover {
+            border-color: #0074bb;
+            color: #0074bb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 116, 187, 0.3);
+            background: rgba(0, 116, 187, 0.15);
+        }
+
+        .linkedin-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: brightness(1.2);
+        }
+
+        .contact-link.linkedin:hover .linkedin-logo {
+            filter: none;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 2rem 0;
+            color: #bbb;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content-text {
+                text-align: center;
+            }
+
+            .hero-content-text h1 {
+                text-align: center;
+            }
+
+            .hero-content-text h2 {
+                white-space: normal;
+                font-size: 1.1rem;
+                text-align: center;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .about-content-new {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-cards {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+                max-width: 500px;
+            }
+
+            .about-card {
+                max-width: 100%;
+            }
+
+            .about-image-container {
+                position: static;
+                order: -1;
+            }
+
+            .about-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+            }
+
+            .timeline::after {
+                left: 30px;
+            }
+
+            .timeline-item::after {
+                left: 20px !important;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .resume-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            .resume-btn {
+                font-size: 0.9rem;
+                padding: 0.9rem 1.2rem;
+                min-width: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="profile-section">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format&q=80" alt="Michael Barcelo" class="profile-image">
+                        <div class="hero-content-text">
+                            <h1>Michael Barcelo</h1>
+                            <h2><span class="typing-animation"></span><span class="cursor">|</span></h2>
+                            <p>U.S. Citizen with 6+ years of experience designing cloud infrastructure, automating mission-critical systems, and leading scalable DevOps solutions. Passionate about blending software engineering, embedded systems, and cloud automation to build resilient, intelligent platforms that serve real-world needs, from enterprise monitoring to future space-tech applications.</p>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="https://github.com/MBarc" class="btn btn-secondary" target="_blank">View GitHub →</a>
+                        <a href="https://www.linkedin.com/in/michaelbarcelo/" class="btn btn-secondary" target="_blank">LinkedIn →</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="code-snippet snippet-1">
+                        <div>$ ansible-playbook deploy.yml</div>
+                        <div style="color: #00ff88;">✓ Infrastructure deployed</div>
+                    </div>
+                    <div class="code-snippet snippet-2">
+                        <div>apiVersion: apps/v1</div>
+                        <div>kind: Deployment</div>
+                        <div>metadata:</div>
+                        <div>&nbsp;&nbsp;name: dynatrace-monitor</div>
+                    </div>
+                    <div class="code-snippet snippet-3">
+                        <div>pipeline {</div>
+                        <div>&nbsp;&nbsp;agent any</div>
+                        <div>&nbsp;&nbsp;stages { ... }</div>
+                        <div>}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content-new">
+                <div class="about-cards">
+                    <div class="about-card">
+                        <div class="card-icon">🚀</div>
+                        <h3 class="card-title">My Journey</h3>
+                        <p class="card-text">DevOps Engineer, IoT systems builder, and automation enthusiast based in South Florida. Over the past 6+ years, I've worked at the intersection of software engineering, systems operations, and real-world problem solving. My journey started with hands-on tech support and evolved into leading automation initiatives across cloud platforms and enterprise-scale monitoring systems.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">⚙️</div>
+                        <h3 class="card-title">Technical Expertise</h3>
+                        <p class="card-text">I specialize in Python scripting, infrastructure as code, and building end-to-end automations using tools like Ansible, Azure DevOps, and cloud platforms. Currently leading the Dynatrace Support Team at Assurant, where I've scaled observability solutions across half of the company's technical footprint and trained an international Tier 1 support team.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">🌐</div>
+                        <h3 class="card-title">Beyond DevOps</h3>
+                        <p class="card-text">I hold a Master's in Internet of Things and have built secure sensor networks, cloud-integrated video processing systems, and internal tooling that saved institutions hundreds of thousands of dollars. My approach blends technical depth with strong documentation, mentoring, and process improvement.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">🛰️</div>
+                        <h3 class="card-title">Future Aspirations</h3>
+                        <p class="card-text">I'm a U.S. citizen, fluent in English and Spanish, and open to remote, hybrid, or relocation-based opportunities. I'm especially interested in roles aligned with space technology, aerospace research, or high-impact infrastructure where I can contribute to cutting-edge innovations.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Personal Side</h3>
+                        <p class="card-text">When I'm not working, you'll find me building DIY electronics, 3D printing enclosures for Raspberry Pi projects, or playing chess. I believe technology is at its best when it empowers others, and that's the mission I bring to every team and project I join.</p>
+                    </div>
+                </div>
+                
+                <div class="about-image-container">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face&auto=format&q=80" alt="Michael Barcelo - Professional Photo" class="about-image">
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="years-experience">6+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">A comprehensive toolkit enabling me to work across the full technology stack</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🚀 DevOps & Automation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Ansible Tower</span>
+                        <span class="skill-tag">Azure DevOps</span>
+                        <span class="skill-tag">Octopus Deploy</span>
+                        <span class="skill-tag">CI/CD Pipelines</span>
+                        <span class="skill-tag">Infrastructure as Code</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>☁️ Cloud Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microsoft Azure</span>
+                        <span class="skill-tag">Service Fabric</span>
+                        <span class="skill-tag">Azure Functions</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Google Cloud</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>📊 Monitoring & Observability</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Dynatrace</span>
+                        <span class="skill-tag">Application Insights</span>
+                        <span class="skill-tag">Graylog</span>
+                        <span class="skill-tag">Event Viewer</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>💻 Programming & Scripting</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">RESTful APIs</span>
+                        <span class="skill-tag">Bash/Shell</span>
+                        <span class="skill-tag">Node.js</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🌐 IoT & Hardware Integration</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">IoT Architecture</span>
+                        <span class="skill-tag">Sensor Integration</span>
+                        <span class="skill-tag">MQTT</span>
+                        <span class="skill-tag">Arduino/Raspberry Pi</span>
+                        <span class="skill-tag">ESP32/ESP8266</span>
+                        <span class="skill-tag">Antenna Design</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Deep Learning</span>
+                        <span class="skill-tag">Zigbee</span>
+                        <span class="skill-tag">LoRaWAN</span>
+                        <span class="skill-tag">5G</span>
+                        <span class="skill-tag">Hadoop</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>🐧 Systems & Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux (CentOS/RedHat)</span>
+                        <span class="skill-tag">Windows Server</span>
+                        <span class="skill-tag">Ubuntu</span>
+                        <span class="skill-tag">Rocky Linux</span>
+                        <span class="skill-tag">CentOS</span>
+                        <span class="skill-tag">RedHat</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>🔧 Tools & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Visual Studio Code</span>
+                        <span class="skill-tag">LucidChart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtitle">Key milestones in my DevOps and infrastructure journey</p>
+            
+            <div class="resume-downloads">
+                <h3 class="downloads-title">Download Resume</h3>
+                <div class="resume-buttons">
+                    <a href="#" class="resume-btn" download="Michael_Barcelo_Software_Engineer_Resume.pdf">
+                        💻 Software Engineer Resume
+                    </a>
+                    <a href="#" class="resume-btn" download="Michael_Barcelo_DevOps_Engineer_Resume.pdf">
+                        ⚙️ DevOps Engineer Resume
+                    </a>
+                    <a href="#" class="resume-btn" download="Michael_Barcelo_IoT_Engineer_Resume.pdf">
+                        🌐 IoT Engineer Resume
+                    </a>
+                    <a href="#" class="resume-btn" download="Michael_Barcelo_General_Resume.pdf">
+                        📄 General Resume
+                    </a>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">April 2021 - Present</div>
+                    <h3 class="timeline-title">DevOps Engineer</h3>
+                    <div class="timeline-company">Assurant - Cutler Bay, FL</div>
+                    <div class="timeline-description">
+                        Leading observability strategy for 50+ cloud and on-premises systems. Built end-to-end automation integrating ServiceNow, Ansible, and Service Fabric. Trained 15-member support team achieving 100+ weekly tickets with zero SLA violations.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">December 2019 - March 2021</div>
+                    <h3 class="timeline-title">Systems Administrator Assistant</h3>
+                    <div class="timeline-company">FIU Division of IT - Miami, FL</div>
+                    <div class="timeline-description">
+                        Developed PHP APIs for Zoom monitoring dashboards, created Python automation scripts, and led university's transition to virtual learning. Managed network onboarding for 287 classrooms, saving $10K annually.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">January 2019 - December 2019</div>
+                    <h3 class="timeline-title">Media Systems Administrator</h3>
+                    <div class="timeline-company">FIU College of Medicine - Miami, FL</div>
+                    <div class="timeline-description">
+                        Overhauled cloud computing workflow with Django web application for sensitive video processing. Automated media pipeline saving $625K in outsourced costs while ensuring HIPAA compliance.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">December 2017 - January 2019</div>
+                    <h3 class="timeline-title">Student Assistant</h3>
+                    <div class="timeline-company">FIU Division of IT - Miami, FL</div>
+                    <div class="timeline-description">
+                        Provided technical support and assistance to IT operations while completing undergraduate studies. Gained hands-on experience with university infrastructure, help desk operations, and system administration fundamentals that laid the foundation for advanced technical roles.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">August 2016 - December 2017</div>
+                    <h3 class="timeline-title">IT Technician</h3>
+                    <div class="timeline-company">PC Works Technologies - Miami, FL</div>
+                    <div class="timeline-description">
+                        Provided dedicated IT support for business clients, managing technical operations for multiple users across various locations. Diagnosed and resolved networking, hardware, and software issues while building foundational IT and systems administration skills.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Real-world applications showcasing my technical expertise and problem-solving abilities</p>
+            
+            <div class="projects-grid">
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">Dynatrace Automation Suite</h3>
+                        <div class="project-type">DevOps | Monitoring</div>
+                    </div>
+                    <div class="project-description">
+                        End-to-end automation integrating ServiceNow, Ansible Tower, and Service Fabric. Automated user onboarding, synthetic monitor creation, and maintenance window management across 50+ systems.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Ansible</span>
+                        <span class="project-tag">PowerShell</span>
+                        <span class="project-tag">Dynatrace API</span>
+                        <span class="project-tag">ServiceNow</span>
+                        <span class="project-tag">Azure DevOps</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link documentation" download="Dynatrace_Automation_Documentation.pdf">
+                            📄 Documentation
+                        </a>
+                        <a href="https://github.com/MBarc" class="project-link github" target="_blank">
+                            🔗 GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">FIU Virtual Learning Infrastructure</h3>
+                        <div class="project-type">Full-Stack | API Development</div>
+                    </div>
+                    <div class="project-description">
+                        PHP-based middleware APIs connecting Zoom servers to executive dashboards. Enabled monitoring of virtual instruction metrics across 287 classrooms during COVID-19 transition.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Zoom API</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">HTML/CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link documentation" download="FIU_Virtual_Learning_Documentation.pdf">
+                            📄 Documentation
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">Medical Video Processing Pipeline</h3>
+                        <div class="project-type">Cloud | Data Processing</div>
+                    </div>
+                    <div class="project-description">
+                        Django-based web application for secure processing of 40+ years of sensitive video therapy sessions. HIPAA-compliant cloud workflow saving $625K in outsourced costs.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Django</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Cloud Storage</span>
+                        <span class="project-tag">Video Processing</span>
+                        <span class="project-tag">HIPAA Compliance</span>
+                        <span class="project-tag">Linux</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link documentation" download="Medical_Video_Pipeline_Documentation.pdf">
+                            📄 Documentation
+                        </a>
+                        <a href="https://github.com/MBarc" class="project-link github" target="_blank">
+                            🔗 GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">IoT Sensor Network Architecture</h3>
+                        <div class="project-type">IoT | Edge Computing</div>
+                    </div>
+                    <div class="project-description">
+                        Real-time data processing system integrating Arduino/Raspberry Pi sensors with cloud platforms. Implemented MQTT protocols and edge computing solutions for enterprise applications.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">IoT Architecture</span>
+                        <span class="project-tag">MQTT</span>
+                        <span class="project-tag">Arduino</span>
+                        <span class="project-tag">Raspberry Pi</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Edge Computing</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link documentation" download="IoT_Sensor_Network_Documentation.pdf">
+                            📄 Documentation
+                        </a>
+                        <a href="https://github.com/MBarc" class="project-link github" target="_blank">
+                            🔗 GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">Inventory Management Automation</h3>
+                        <div class="project-type">Automation | Data Analytics</div>
+                    </div>
+                    <div class="project-description">
+                        Custom PHP web application with predictive alerting using linear regression. Automated inventory tracking and low-stock warnings, eliminating stockouts across university warehouses.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">Machine Learning</span>
+                        <span class="project-tag">MySQL</span>
+                        <span class="project-tag">Linear Regression</span>
+                        <span class="project-tag">Data Analytics</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link documentation" download="Inventory_Management_Documentation.pdf">
+                            📄 Documentation
+                        </a>
+                        <a href="https://github.com/MBarc" class="project-link github" target="_blank">
+                            🔗 GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <h3 class="project-title">CI/CD Pipeline Optimization</h3>
+                        <div class="project-type">DevOps | Infrastructure</div>
+                    </div>
+                    <div class="project-description">
+                        Diagnosed and optimized deployment pipelines using Octopus Deploy and Azure DevOps. Resolved bottlenecks and failures across multi-region environments, improving deployment reliability.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Azure DevOps</span>
+                        <span class="project-tag">Octopus Deploy</span>
+                        <span class="project-tag">CI/CD</span>
+                        <span class="project-tag">PowerShell</span>
+                        <span class="project-tag">Infrastructure as Code</span>
+                        <span class="project-tag">Multi-Region</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link documentation" download="CICD_Pipeline_Documentation.pdf">
+                            📄 Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="certifications-section">
+        <div class="container">
+            <h2 class="section-title">Certifications & Professional Development</h2>
+            <p class="section-subtitle">Continuous learning and industry-recognized credentials that validate my multi-cloud and development expertise</p>
+            
+            <div class="certifications">
+                <div class="cert-grid">
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/512px-Amazon_Web_Services_Logo.svg.png" alt="AWS" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">AWS Cloud Practitioner</div>
+                            <div class="cert-status certified">Certified</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/512px-Microsoft_Azure.svg.png" alt="Microsoft Azure" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">Microsoft Azure Developer Associate (AZ-204)</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/512px-Amazon_Web_Services_Logo.svg.png" alt="AWS" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">AWS Certified Developer Associate</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/512px-Google_Cloud_logo.svg.png" alt="Google Cloud" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">Google Cloud Digital Leader</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/512px-Octicons-mark-github.svg.png" alt="GitHub" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">GitHub Foundations</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/512px-Octicons-mark-github.svg.png" alt="GitHub" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">GitHub Actions</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://logos-world.net/wp-content/uploads/2020/09/IBM-Logo.png" alt="IBM" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">Software Engineering Fundamentals</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQHiNSL4Or29cg/company-logo_200_200/company-logo_200_200/0/1631311446380?e=2147483647&v=beta&t=example" alt="Board Infinity" class="cert-logo" style="background: white; border-radius: 5px;">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">SAFe Fundamentals Specialization</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/512px-Google_2015_logo.svg.png" alt="Google" class="cert-logo">
+                        </div>
+                        <div class="cert-details">
+                            <div class="cert-name">Google Prompting Engineering</div>
+                            <div class="cert-status">Pursuing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Colleagues Say</h2>
+            <p class="section-subtitle">Feedback from team members and leadership I've worked with</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Owing to his skillset in automation and quick learning, Assurant Inc. has seen great improvement in the applications assigned to Michael since he was hired back in April 2021. He has always been enthusiastic about his work and does not leave a single stone unturned when presented with a challenge."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">OZ</div>
+                        <div class="author-info">
+                            <h4>Orlando Zaragoza</h4>
+                            <p>Director, Assurant</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Michael brought more than just technical expertise to Assurant. He brought real energy to the company culture. Even though we worked in different departments, we'd often grab lunch together, and it was clear how connected he was across teams. He was always upbeat, collaborative, and genuinely cared about helping others. You could tell people looked forward to working with him, not just because he was skilled but because he made the environment better."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JB</div>
+                        <div class="author-info">
+                            <h4>Joseph Basulto</h4>
+                            <p>Coworker, Assurant Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Michael is an excellent problem solver and frequently takes initiative. Michael is intelligent, committed, and an inquisitive individual."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JR</div>
+                        <div class="author-info">
+                            <h4>Javier Rodriguez</h4>
+                            <p>Coworker, Florida International University</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "He showed exemplary leadership and teamwork skills throughout the entire hackathon. His skills in programming were also a huge asset in the process and his expertise was and continues to be superior."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AV</div>
+                        <div class="author-info">
+                            <h4>Alexandra Vazquez</h4>
+                            <p>Hackathon Teammate & Former Classmate</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Michael was our go-to tech expert, and I can honestly say we would've been lost without him. Our office has a lot of older employees, and he always showed incredible patience and professionalism. He explained things clearly, fixed problems quickly, and never made anyone feel uncomfortable asking for help."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Maria Rivera</h4>
+                            <p>Customer, Combined Underwriters of Miami</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Ready to discuss your next DevOps, Software Development, or IoT project? I'm always open to new opportunities and interesting conversations about technology.</p>
+                
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/michaelbarcelo/" class="contact-link linkedin" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn" class="linkedin-logo">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Michael Barcelo. Built with passion for technology and continuous learning.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Typing animation for job titles
+        const typingElement = document.querySelector('.typing-animation');
+        const jobTitles = ['DevOps Engineer', 'Software Engineer', 'IoT Engineer'];
+        let currentTitleIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function typeAnimation() {
+            const currentTitle = jobTitles[currentTitleIndex];
+            
+            if (isDeleting) {
+                // Backspacing
+                typingElement.textContent = currentTitle.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+                typeSpeed = 50; // Faster backspacing
+                
+                if (currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentTitleIndex = (currentTitleIndex + 1) % jobTitles.length;
+                    typeSpeed = 200; // Pause before starting next word
+                }
+            } else {
+                // Typing forward
+                typingElement.textContent = currentTitle.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+                typeSpeed = 100; // Normal typing speed
+                
+                if (currentCharIndex === currentTitle.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000; // Pause when word is complete
+                }
+            }
+            
+            setTimeout(typeAnimation, typeSpeed);
+        }
+
+        // Start the animation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(typeAnimation, 1000); // Initial delay
+        });
+
+        // Scroll to contact section function
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Calculate years of experience dynamically
+        function calculateYearsExperience() {
+            const startDate = new Date('2016-08-01'); // August 1, 2016
+            const currentDate = new Date();
+            
+            // Calculate the difference in years
+            const diffTime = currentDate - startDate;
+            const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25); // Account for leap years
+            
+            // Round to nearest half year for more precision
+            const roundedYears = Math.round(diffYears * 2) / 2;
+            
+            // Update the display
+            const experienceElement = document.getElementById('years-experience');
+            if (experienceElement) {
+                experienceElement.textContent = roundedYears + '+';
+            }
+        }
+
+        // Calculate years of experience dynamically
+        function calculateYearsExperience() {
+            const startDate = new Date('2016-08-01'); // August 1, 2016
+            const currentDate = new Date();
+            
+            // Calculate the difference in years
+            const diffTime = currentDate - startDate;
+            const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365.25); // Account for leap years
+            
+            // Round to nearest half year for more precision
+            const roundedYears = Math.round(diffYears * 2) / 2;
+            
+            // Update the display
+            const experienceElement = document.getElementById('years-experience');
+            if (experienceElement) {
+                experienceElement.textContent = roundedYears + '+';
+            }
+        }
+
+        // Calculate experience when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateYearsExperience();
+        });
+    </script>
+
+</body>
+</html>
