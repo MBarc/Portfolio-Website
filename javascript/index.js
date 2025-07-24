@@ -147,3 +147,111 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start typing animation after greeting settles
     setTimeout(typeAnimation, 4500); // Start after all greetings are done
 });
+
+// Add this JavaScript code to your index.js file, after the existing DOMContentLoaded event
+
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get mobile menu elements
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+
+    // Toggle mobile menu
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Toggle the active class
+            mobileMenu.classList.toggle('active');
+            
+            // Change the hamburger icon
+            if (mobileMenu.classList.contains('active')) {
+                mobileMenuToggle.innerHTML = '✕'; // X icon when open
+            } else {
+                mobileMenuToggle.innerHTML = '☰'; // Hamburger when closed
+            }
+        });
+    }
+
+    // Close mobile menu when clicking on a link
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+                }
+            }
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (mobileMenu && mobileMenuToggle) {
+            const isClickInsideMenu = mobileMenu.contains(e.target);
+            const isClickOnToggle = mobileMenuToggle.contains(e.target);
+            
+            if (!isClickInsideMenu && !isClickOnToggle && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+            }
+        }
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            if (mobileMenuToggle) {
+                mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+            }
+        }
+    });
+
+    // Handle window resize - close menu if switching to desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            if (mobileMenuToggle) {
+                mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+            }
+        }
+    });
+});
+
+// Navigation scroll functionality (add this too if you don't have it)
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-menu a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Only handle internal links (starting with #)
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // Calculate offset for fixed header
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            }
+        });
+    });
+});
