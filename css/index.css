@@ -1623,62 +1623,222 @@ nav {
     font-weight: 600;
 }
 
-/* PRECISE FIXES - Add these to your CSS to fix only the X and timeline issues */
+/* Mobile Timeline and Navbar Fixes - Add to your CSS */
 
 @media screen and (max-width: 768px) {
-    
-    /* Fix 1: Perfect X Animation - only modify the transformation */
-    .mobile-menu-toggle.active span {
-        background: transparent !important;
-        transform: none !important;
-        opacity: 1 !important;
+    /* Fix Timeline - Center dots on the line */
+    .timeline {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 50px !important;
+        position: relative !important;
     }
 
-    .mobile-menu-toggle.active span::before {
-        top: 0 !important;
-        left: 0 !important;
-        transform: rotate(45deg) !important;
-        background: #00ff88 !important;
-        opacity: 1 !important;
-    }
-
-    .mobile-menu-toggle.active span::after {
-        top: 0 !important;
-        left: 0 !important;
-        transform: rotate(-45deg) !important;
-        background: #00ff88 !important;
-        opacity: 1 !important;
-    }
-
-    /* Fix 2: Timeline dots - only adjust positioning */
     .timeline::after {
-        left: 22px !important;
+        content: '' !important;
+        position: absolute !important;
         width: 3px !important;
+        background: #00ff88 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 22px !important; /* Adjusted to center the line through dots */
+        margin-left: 0 !important;
     }
 
     .timeline-item {
-        margin-left: 60px !important;
+        position: relative !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        padding: 1.5rem !important;
+        border-radius: 15px !important;
+        margin-bottom: 2rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
         width: calc(100% - 60px) !important;
+        left: 0 !important;
+        margin-left: 60px !important;
     }
 
     .timeline-item::after {
-        left: -50px !important;
+        content: '' !important;
+        position: absolute !important;
         width: 20px !important;
         height: 20px !important;
-        border: none !important;
-        box-shadow: none !important;
         background: #00ff88 !important;
+        border-radius: 50% !important;
+        top: 30px !important;
+        left: -50px !important; /* This centers the dot on the line */
+        border: 3px solid #0f0f23 !important; /* Optional: adds a border for better visibility */
+        z-index: 10 !important;
     }
-}
 
-/* Remove any debugging outlines that were added */
-@media screen and (max-width: 768px) {
-    .mobile-menu-toggle {
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    /* Enhanced Mobile Navigation */
+    nav {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 15px !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 10px !important;
+        flex-wrap: nowrap !important;
     }
-    
-    .timeline-item::after {
-        border: none !important;
-        box-shadow: none !important;
+
+    .nav-links {
+        display: none !important;
+    }
+
+    /* Mobile Menu Toggle Button - Better Design */
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-around !important;
+        width: 40px !important;
+        height: 40px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        z-index: 1001 !important;
+    }
+
+    .mobile-menu-toggle:hover {
+        background: rgba(0, 255, 136, 0.15) !important;
+        border-color: rgba(0, 255, 136, 0.3) !important;
+    }
+
+    /* Hamburger Lines */
+    .mobile-menu-toggle::before,
+    .mobile-menu-toggle::after,
+    .mobile-menu-toggle span {
+        content: '' !important;
+        display: block !important;
+        height: 2px !important;
+        width: 100% !important;
+        background: #fff !important;
+        border-radius: 1px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .mobile-menu-toggle span {
+        margin: 0 !important;
+    }
+
+    /* Transform to X when active */
+    .mobile-menu-toggle.active::before {
+        transform: rotate(45deg) translate(6px, 6px) !important;
+    }
+
+    .mobile-menu-toggle.active::after {
+        transform: rotate(-45deg) translate(6px, -6px) !important;
+    }
+
+    .mobile-menu-toggle.active span {
+        opacity: 0 !important;
+        transform: scale(0) !important;
+    }
+
+    /* Mobile Menu Dropdown */
+    .mobile-menu {
+        display: none !important;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        right: 15px !important;
+        left: 15px !important;
+        background: rgba(15, 15, 35, 0.98) !important;
+        backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 15px !important;
+        padding: 1.5rem !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+        z-index: 1000 !important;
+        max-width: 350px !important;
+        margin: 0 auto !important;
+        transform: translateY(-10px) !important;
+        opacity: 0 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .mobile-menu.active {
+        display: block !important;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        animation: slideDownFade 0.3s ease forwards !important;
+    }
+
+    @keyframes slideDownFade {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.95);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .mobile-menu ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .mobile-menu li {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .mobile-menu li:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    .mobile-menu a {
+        color: #fff !important;
+        text-decoration: none !important;
+        display: block !important;
+        padding: 1rem 1.2rem !important;
+        border-radius: 10px !important;
+        transition: all 0.3s ease !important;
+        font-weight: 500 !important;
+        border: 1px solid transparent !important;
+        font-size: 0.95rem !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .mobile-menu a::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(45deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1)) !important;
+        transition: left 0.3s ease !important;
+        z-index: -1 !important;
+    }
+
+    .mobile-menu a:hover::before,
+    .mobile-menu a.active::before {
+        left: 0 !important;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+        background: rgba(0, 255, 136, 0.15) !important;
+        border-color: rgba(0, 255, 136, 0.3) !important;
+        color: #00ff88 !important;
+        transform: translateX(5px) !important;
+        box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2) !important;
+    }
+
+    /* Home button adjustments */
+    .home-btn {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1rem !important;
+        order: 1 !important;
+        flex-shrink: 0 !important;
     }
 }
