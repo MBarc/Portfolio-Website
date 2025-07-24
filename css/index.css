@@ -1623,274 +1623,96 @@ nav {
     font-weight: 600;
 }
 
-/* EMERGENCY MOBILE FIX - Add this to the VERY END of your CSS file */
+/* Add these fixes to your CSS file */
 
-/* Force mobile layout - highest specificity */
+/* 1. Fix mobile menu functionality */
 @media screen and (max-width: 768px) {
-    /* Nuclear option - force everything to behave */
-    * {
-        max-width: 100vw !important;
-        box-sizing: border-box !important;
+    .mobile-menu {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 15px !important;
+        padding: 1.5rem !important;
+        margin-top: 1rem !important;
+        min-width: 250px !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3) !important;
+        z-index: 1000 !important;
     }
-    
-    html {
-        overflow-x: hidden !important;
-        width: 100% !important;
+
+    .mobile-menu.active {
+        display: block !important;
+        animation: slideDown 0.3s ease !important;
     }
-    
-    body {
-        overflow-x: hidden !important;
-        width: 100% !important;
-        margin: 0 !important;
+
+    .mobile-menu ul {
+        list-style: none !important;
         padding: 0 !important;
-    }
-    
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 15px !important;
-        margin: 0 auto !important;
-    }
-
-    /* Navigation - nuclear fix */
-    header {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0.5rem 0 !important;
-    }
-    
-    nav {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 10px !important;
         margin: 0 !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        gap: 5px !important;
-        flex-wrap: nowrap !important;
     }
 
-    .nav-links {
+    .mobile-menu li {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .mobile-menu a {
+        color: #fff !important;
+        text-decoration: none !important;
+        display: block !important;
+        padding: 1rem !important;
+        border-radius: 10px !important;
+        transition: all 0.3s ease !important;
+        font-weight: 500 !important;
+        border: 1px solid transparent !important;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+        background: rgba(0, 255, 136, 0.15) !important;
+        border-color: rgba(0, 255, 136, 0.3) !important;
+        color: #00ff88 !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* 2. Hide emojis on mobile slideshow, keep confetti */
+    .balloon,
+    .party-emoji {
         display: none !important;
     }
 
-    .mobile-menu-toggle {
+    /* Keep confetti visible */
+    .confetti {
         display: block !important;
-        order: 2 !important;
+        width: 4px !important;
+        height: 4px !important;
     }
 
-    .home-btn {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 0.9rem !important;
-        order: 1 !important;
-        flex-shrink: 0 !important;
-    }
-
-    /* Hero section - force proper layout */
-    .hero {
-        width: 100% !important;
-        padding-top: 80px !important;
-        padding-bottom: 40px !important;
-    }
-
-    .hero-content {
-        display: block !important;
-        width: 100% !important;
-        grid-template-columns: none !important;
-    }
-
-    .hero-text {
-        width: 100% !important;
-        text-align: center !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .hero-image-section {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        padding: 0 !important;
-    }
-
-    /* Slideshow - absolute fix */
-    .slideshow-container {
-        width: 200px !important;
-        height: 200px !important;
-        margin: 0 auto !important;
-        flex-shrink: 0 !important;
-    }
-
-    .slide-btn {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 12px !important;
-    }
-
-    /* Typography fixes */
-    .name-title h1 {
-        font-size: 1.8rem !important;
-    }
-
-    .job-title {
-        font-size: 0.9rem !important;
-    }
-
-    .hero-description {
-        font-size: 0.85rem !important;
-        padding: 0 10px !important;
-    }
-
-    /* CTA buttons */
-    .cta-buttons {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important;
-        gap: 0.8rem !important;
-    }
-
-    .btn {
-        width: 90% !important;
-        max-width: 250px !important;
-        margin: 0 !important;
-        text-align: center !important;
-        padding: 10px 15px !important;
-    }
-
-    /* Sections - force block layout */
-    section {
-        width: 100% !important;
-        padding: 40px 0 !important;
-    }
-
-    .section-title {
-        font-size: 1.6rem !important;
-        text-align: center !important;
-    }
-
-    .section-subtitle {
-        font-size: 0.9rem !important;
-        text-align: center !important;
-        padding: 0 15px !important;
-    }
-
-    /* About section */
-    .about-content-new {
-        display: block !important;
-        grid-template-columns: none !important;
-        width: 100% !important;
-    }
-
-    .about-cards {
-        display: block !important;
-        grid-template-columns: none !important;
-        width: 100% !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .about-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-bottom: 1rem !important;
-        padding: 1rem !important;
-    }
-
-    /* Skills - force full width */
-    .skills-grid {
-        display: block !important;
-        flex-wrap: nowrap !important;
-        width: 100% !important;
-    }
-
-    .skill-category {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        flex: none !important;
-        margin-bottom: 1rem !important;
-        padding: 1rem !important;
-    }
-
-    /* Projects */
-    .projects-grid {
-        display: block !important;
-        flex-wrap: nowrap !important;
-        width: 100% !important;
-    }
-
-    .project-item {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        flex: none !important;
-        margin-bottom: 1rem !important;
-    }
-
-    /* Certifications */
-    .cert-grid {
-        display: block !important;
-        grid-template-columns: none !important;
-        width: 100% !important;
-    }
-
-    .cert-item {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-bottom: 0.8rem !important;
-    }
-
-    /* Testimonials */
-    .testimonial-grid {
-        display: block !important;
-        flex-wrap: nowrap !important;
-        width: 100% !important;
-    }
-
-    .testimonial {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        flex: none !important;
-        margin-bottom: 1rem !important;
-    }
-
-    /* Timeline */
-    .timeline {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding-left: 30px !important;
+    /* 3. Fix timeline green balls positioning */
+    .timeline::after {
+        left: 15px !important;
+        width: 2px !important;
     }
 
     .timeline-item {
-        width: calc(100% - 50px) !important;
+        width: calc(100% - 60px) !important;
         left: 0 !important;
-        margin-left: 50px !important;
+        margin-left: 60px !important;
+        padding: 1.5rem !important;
+        margin-bottom: 2rem !important;
     }
 
-    /* Contact */
-    .contact-links {
-        display: block !important;
-        text-align: center !important;
-        width: 100% !important;
-    }
-
-    .contact-link {
-        display: inline-block !important;
-        width: 200px !important;
-        margin: 0 auto !important;
-    }
-}
-
-/* Backup for very small screens */
-@media screen and (max-width: 400px) {
-    .slideshow-container {
-        width: 180px !important;
-        height: 180px !important;
-    }
-    
-    .name-title h1 {
-        font-size: 1.5rem !important;
+    .timeline-item::after {
+        content: '' !important;
+        position: absolute !important;
+        width: 15px !important;
+        height: 15px !important;
+        background: #00ff88 !important;
+        border-radius: 50% !important;
+        left: -45px !important;
+        top: 30px !important;
     }
 }
