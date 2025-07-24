@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentYear = new Date().getFullYear();
         const copyrightElement = document.querySelector('footer p');
         if (copyrightElement) {
-            copyrightElement.innerHTML = `&copy; ${currentYear} Michael Barcelo. Built with passion for technology and continuous learning.`;
+            copyrightElement.innerHTML = `&copy; ${currentYear} FFFMichael Barcelo. Built with passion for technology and continuous learning.`;
         }
     }
 
