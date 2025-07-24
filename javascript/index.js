@@ -145,5 +145,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
     
     // Start typing animation after greeting settles
-    setTimeout(typeAnimation, 12000); // Start after all greetings are done
+    setTimeout(typeAnimation, 6000); // Start after all greetings are done
 });
