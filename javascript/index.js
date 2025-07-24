@@ -146,13 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Start typing animation after greeting settles
     setTimeout(typeAnimation, 4500); // Start after all greetings are done
-});
 
-// Add this JavaScript code to your index.js file, after the existing DOMContentLoaded event
-
-// Mobile menu functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Get mobile menu elements
+    // Mobile menu functionality
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
@@ -219,10 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
 
-// Navigation scroll functionality (add this too if you don't have it)
-document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-link, .mobile-menu a');
     
@@ -235,15 +227,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 
                 const targetId = href.substring(1);
-                const targetSection = document.getElementById(targetId);
+                let targetSection;
+                
+                // Handle special case for "top" or "home"
+                if (targetId === 'top' || targetId === '' || targetId === 'home') {
+                    targetSection = document.querySelector('.hero') || document.body;
+                } else {
+                    targetSection = document.getElementById(targetId);
+                }
                 
                 if (targetSection) {
                     // Calculate offset for fixed header
-                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 0;
                     const targetPosition = targetSection.offsetTop - headerHeight - 20;
                     
                     window.scrollTo({
-                        top: targetPosition,
+                        top: Math.max(0, targetPosition),
                         behavior: 'smooth'
                     });
                     
@@ -253,5 +253,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+    });
+
+    // Header scroll effects (optional - add if you want dynamic header behavior)
+    let lastScrollTop = 0;
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add scrolled class for styling
+        if (scrollTop > 50 && header) {
+            header.classList.add('scrolled');
+        } else if (header) {
+            header.classList.remove('scrolled');
+        }
+        
+        // Optional: Hide header when scrolling down, show when scrolling up
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down
+            if (header) header.classList.add('hidden');
+        } else {
+            // Scrolling up
+            if (header) header.classList.remove('hidden');
+        }
+        
+        lastScrollTop = scrollTop;
+        
+        // Update scroll progress indicator
+        const scrollProgress = document.getElementById('scroll-progress');
+        if (scrollProgress) {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        }
     });
 });
