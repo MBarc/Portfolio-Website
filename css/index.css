@@ -1181,6 +1181,16 @@ html {
 }
 
 .certified {
+    color: #66ff00 !important;
+    font-weight: 600;
+}
+
+.pursuing {
+    color: ##ffff00 !important;
+    font-weight: 600;
+}
+
+.inqueue {
     color: #00d4ff !important;
     font-weight: 600;
 }
