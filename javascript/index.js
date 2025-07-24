@@ -22,6 +22,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call the function to calculate experience
     calculateYearsExperience();
 
+    // Dynamic copyright year
+    function updateCopyrightYear() {
+        const currentYear = new Date().getFullYear();
+        const copyrightElement = document.querySelector('footer p');
+        if (copyrightElement) {
+            copyrightElement.innerHTML = `&copy; ${currentYear} Michael Barcelo. Built with passion for technology and continuous learning.`;
+        }
+    }
+
+    // Update copyright year
+    updateCopyrightYear();
+
     // Slideshow functionality
     const slideshowImages = [
         "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 1
