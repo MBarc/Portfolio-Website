@@ -158,14 +158,13 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation();
             
-            // Toggle the active class
+            // Toggle the active classes
             mobileMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
             
-            // Change the hamburger icon
-            if (mobileMenu.classList.contains('active')) {
-                mobileMenuToggle.innerHTML = '✕'; // X icon when open
-            } else {
-                mobileMenuToggle.innerHTML = '☰'; // Hamburger when closed
+            // Add haptic feedback for mobile devices
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
             }
         });
     }
@@ -173,11 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close mobile menu when clicking on a link
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (mobileMenu) {
+            if (mobileMenu && mobileMenuToggle) {
                 mobileMenu.classList.remove('active');
-                if (mobileMenuToggle) {
-                    mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
-                }
+                mobileMenuToggle.classList.remove('active');
             }
         });
     });
@@ -190,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!isClickInsideMenu && !isClickOnToggle && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
-                mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+                mobileMenuToggle.classList.remove('active');
             }
         }
     });
@@ -200,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
             if (mobileMenuToggle) {
-                mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+                mobileMenuToggle.classList.remove('active');
             }
         }
     });
@@ -210,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth > 768 && mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
             if (mobileMenuToggle) {
-                mobileMenuToggle.innerHTML = '☰'; // Reset to hamburger
+                mobileMenuToggle.classList.remove('active');
             }
         }
     });
