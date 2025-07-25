@@ -1720,10 +1720,11 @@ nav {
         content: '' !important;
         display: block !important;
         height: 2px !important;
-        width: 100% !important;
+        width: 60% !important;
         background: #fff !important;
         border-radius: 1px !important;
         transition: all 0.3s ease !important;
+        margin: 0 auto;
     }
 
     .mobile-menu-toggle span {
