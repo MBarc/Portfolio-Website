@@ -1691,59 +1691,71 @@ nav {
         display: none !important;
     }
 
-    /* Mobile Menu Toggle Button - Better Design */
-    .mobile-menu-toggle {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-around !important;
-        width: 40px !important;
-        height: 40px !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 8px !important;
-        cursor: pointer !important;
-        padding: 8px !important;
-        transition: all 0.3s ease !important;
-        position: relative !important;
-        z-index: 1001 !important;
-    }
+/* Mobile Menu Toggle Button - Clean Method */
+.mobile-menu-toggle {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    z-index: 1001 !important;
+}
 
-    .mobile-menu-toggle:hover {
-        background: rgba(0, 255, 136, 0.15) !important;
-        border-color: rgba(0, 255, 136, 0.3) !important;
-    }
+.mobile-menu-toggle:hover {
+    background: rgba(0, 255, 136, 0.15) !important;
+    border-color: rgba(0, 255, 136, 0.3) !important;
+}
 
-    /* Hamburger Lines */
-    .mobile-menu-toggle::before,
-    .mobile-menu-toggle::after,
-    .mobile-menu-toggle span {
-        content: '' !important;
-        display: block !important;
-        height: 2px !important;
-        width: 60% !important;
-        background: #fff !important;
-        border-radius: 1px !important;
-        transition: all 0.3s ease !important;
-        margin: 0 auto;
-    }
+/* Hamburger Lines Structure */
+.hamburger-lines {
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+}
 
-    .mobile-menu-toggle span {
-        margin: 0 !important;
-    }
+.hamburger-lines::before,
+.hamburger-lines::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    left: 0;
+}
 
-    /* Transform to X when active */
-    .mobile-menu-toggle.active::before {
-        transform: rotate(45deg) translate(6px, 6px) !important;
-    }
+.hamburger-lines::before { 
+    top: -7px; 
+}
 
-    .mobile-menu-toggle.active::after {
-        transform: rotate(-45deg) translate(6px, -6px) !important;
-    }
+.hamburger-lines::after { 
+    bottom: -7px; 
+}
 
-    .mobile-menu-toggle.active span {
-        opacity: 0 !important;
-        transform: scale(0) !important;
-    }
+/* Perfect X transformation */
+.mobile-menu-toggle.active .hamburger-lines {
+    background: transparent;
+}
+
+.mobile-menu-toggle.active .hamburger-lines::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.mobile-menu-toggle.active .hamburger-lines::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
 
     /* Mobile Menu Dropdown */
     .mobile-menu {
