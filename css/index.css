@@ -1104,6 +1104,17 @@ html {
 }
 
 /* Certifications Section */
+a.cert-item {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+a.cert-item:hover {
+    color: inherit;
+}
+
 .certifications-section {
     background: rgba(0, 0, 0, 0.3);
 }
