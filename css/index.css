@@ -2074,13 +2074,11 @@ nav {
 
 .typing-indicator {
     display: none;
-    align-items: flex-start;
+    align-items: center; /* Changed from flex-start to center */
     gap: 10px;
     margin-bottom: 16px;
     width: 100%;
     position: relative;
-    border: 2px solid red; /* TEMPORARY - for debugging */
-    background: yellow; /* TEMPORARY - for debugging */
 }
 
 .typing-indicator.active {
@@ -2103,7 +2101,10 @@ nav {
 .typing-dots {
     display: flex;
     gap: 4px;
-    align-items: center; /* Ensure dots are centered */
+    align-items: center;
+    justify-content: flex-start;
+    height: 32px; /* Match the avatar height */
+    padding: 0;
 }
 
 .typing-dot {
