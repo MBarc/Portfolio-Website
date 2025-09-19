@@ -1,5 +1,7 @@
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing all functionality...');
+    
     // Calculate years of experience dynamically
     function calculateYearsExperience() {
         const startDate = new Date('2016-08-01'); // August 1, 2016
@@ -299,50 +301,95 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Portfolio Chatbot JavaScript
+    // Portfolio Chatbot JavaScript with DEBUG
+    console.log('Initializing Portfolio Chatbot...');
+    
     class PortfolioChatbot {
         constructor() {
+            console.log('Creating PortfolioChatbot instance...');
+            
             this.chatToggle = document.getElementById('chatToggle');
             this.chatContainer = document.getElementById('chatContainer');
             this.chatMessages = document.getElementById('chatMessages');
             this.chatInput = document.getElementById('chatInput');
             this.sendButton = document.getElementById('sendButton');
             this.typingIndicator = document.getElementById('typingIndicator');
+            
+            console.log('Chat elements found:');
+            console.log('- chatToggle:', this.chatToggle);
+            console.log('- chatContainer:', this.chatContainer);
+            console.log('- chatMessages:', this.chatMessages);
+            console.log('- chatInput:', this.chatInput);
+            console.log('- sendButton:', this.sendButton);
+            console.log('- typingIndicator:', this.typingIndicator);
+            
             this.isOpen = false;
             this.isLoading = false;
             
-            // Your n8n webhook endpoint - UPDATE THIS TO YOUR ACTUAL ENDPOINT
+            // Your n8n webhook endpoint
             this.webhookUrl = 'https://michaelbarcelo.com/webhook/portfolio-chat';
             
-            this.init();
+            if (this.chatToggle && this.chatContainer) {
+                this.init();
+                console.log('Chatbot initialized successfully!');
+            } else {
+                console.error('ERROR: Required chat elements not found!');
+                console.error('Missing chatToggle:', !this.chatToggle);
+                console.error('Missing chatContainer:', !this.chatContainer);
+            }
         }
         
         init() {
-            this.chatToggle.addEventListener('click', () => this.toggleChat());
-            this.sendButton.addEventListener('click', () => this.sendMessage());
-            this.chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    this.sendMessage();
-                }
-            });
+            console.log('Setting up event listeners...');
             
-            // Auto-resize textarea
-            this.chatInput.addEventListener('input', () => {
-                this.chatInput.style.height = 'auto';
-                this.chatInput.style.height = this.chatInput.scrollHeight + 'px';
-            });
+            if (this.chatToggle) {
+                this.chatToggle.addEventListener('click', () => {
+                    console.log('Chat toggle clicked!');
+                    this.toggleChat();
+                });
+            }
+            
+            if (this.sendButton) {
+                this.sendButton.addEventListener('click', () => this.sendMessage());
+            }
+            
+            if (this.chatInput) {
+                this.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+                
+                // Auto-resize textarea
+                this.chatInput.addEventListener('input', () => {
+                    this.chatInput.style.height = 'auto';
+                    this.chatInput.style.height = this.chatInput.scrollHeight + 'px';
+                });
+            }
         }
         
         toggleChat() {
-            this.isOpen = !this.isOpen;
-            this.chatContainer.classList.toggle('active', this.isOpen);
-            this.chatToggle.classList.toggle('active', this.isOpen);
-            this.chatToggle.textContent = this.isOpen ? '✕' : '💬';
+            console.log('Toggling chat. Current state:', this.isOpen);
             
-            if (this.isOpen) {
+            this.isOpen = !this.isOpen;
+            
+            if (this.chatContainer) {
+                this.chatContainer.classList.toggle('active', this.isOpen);
+                console.log('Chat container active class:', this.chatContainer.classList.contains('active'));
+            }
+            
+            if (this.chatToggle) {
+                this.chatToggle.classList.toggle('active', this.isOpen);
+                this.chatToggle.textContent = this.isOpen ? '✕' : '💬';
+                console.log('Chat toggle text changed to:', this.chatToggle.textContent);
+            }
+            
+            if (this.isOpen && this.chatInput) {
                 this.chatInput.focus();
             }
+            
+            console.log('Chat is now:', this.isOpen ? 'OPEN' : 'CLOSED');
         }
         
         async sendMessage() {
@@ -409,18 +456,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         showTyping() {
-            this.typingIndicator.classList.add('active');
-            this.scrollToBottom();
+            if (this.typingIndicator) {
+                this.typingIndicator.classList.add('active');
+                this.scrollToBottom();
+            }
         }
         
         hideTyping() {
-            this.typingIndicator.classList.remove('active');
+            if (this.typingIndicator) {
+                this.typingIndicator.classList.remove('active');
+            }
         }
         
         scrollToBottom() {
-            setTimeout(() => {
-                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
-            }, 100);
+            if (this.chatMessages) {
+                setTimeout(() => {
+                    this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                }, 100);
+            }
         }
         
         escapeHtml(text) {
@@ -431,16 +484,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Global function for suggestion buttons
-    function sendSuggestion(question) {
+    window.sendSuggestion = function(question) {
+        console.log('Suggestion clicked:', question);
         const chatbot = window.portfolioChatbot;
-        if (chatbot) {
+        if (chatbot && chatbot.chatInput) {
             chatbot.chatInput.value = question;
             chatbot.sendMessage();
+        } else {
+            console.error('Chatbot not available for suggestion');
         }
-    }
+    };
     
-    // Initialize chatbot when page loads
-    document.addEventListener('DOMContentLoaded', () => {
-        window.portfolioChatbot = new PortfolioChatbot();
-    });
+    // Initialize chatbot - REMOVED the nested DOMContentLoaded event listener
+    console.log('Creating chatbot instance...');
+    window.portfolioChatbot = new PortfolioChatbot();
+    console.log('Chatbot setup complete!');
 });
