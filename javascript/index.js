@@ -508,6 +508,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Chatbot setup complete!');
 });
 
+// Chat Pointer Notification JavaScript
+// Add this function to your javascript/index.js file
+
 function initializeChatPointer() {
     const pointerNotification = document.getElementById('chatPointerNotification');
     let hasScrolled = false;
@@ -518,12 +521,7 @@ function initializeChatPointer() {
         return;
     }
     
-    // Check if user has already seen the pointer (localStorage)
-    const hasSeenPointer = localStorage.getItem('chatPointerSeen');
-    if (hasSeenPointer) {
-        pointerNotification.style.display = 'none';
-        return;
-    }
+    // Removed localStorage check - pointer will show on every visit
     
     console.log('Initializing chat pointer notification...');
     
@@ -535,8 +533,7 @@ function initializeChatPointer() {
         pointerDismissed = true;
         pointerNotification.classList.add('hidden');
         
-        // Remember that user has seen it
-        localStorage.setItem('chatPointerSeen', 'true');
+        // Removed localStorage persistence - no longer storing that user has seen pointer
         
         // Remove from DOM after animation
         setTimeout(() => {
