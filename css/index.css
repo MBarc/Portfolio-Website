@@ -2078,7 +2078,9 @@ nav {
     gap: 10px;
     margin-bottom: 16px;
     width: 100%;
-    position: relative; /* Ensure it stays in document flow */
+    position: relative;
+    border: 2px solid red; /* TEMPORARY - for debugging */
+    background: yellow; /* TEMPORARY - for debugging */
 }
 
 .typing-indicator.active {
