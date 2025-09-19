@@ -2074,10 +2074,11 @@ nav {
 
 .typing-indicator {
     display: none;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     margin-bottom: 16px;
-    padding: 0 10px; /* Add padding to match messages */
+    width: 100%;
+    position: relative; /* Ensure it stays in document flow */
 }
 
 .typing-indicator.active {
