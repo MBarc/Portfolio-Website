@@ -488,7 +488,10 @@ async callWebhook(message) {
                 <div class="message-content">${this.escapeHtml(content)}</div>
             `;
             
-            this.chatMessages.appendChild(messageDiv);
+            // Insert the message BEFORE the typing indicator, not at the end
+            const typingIndicator = document.getElementById('typingIndicator');
+            this.chatMessages.insertBefore(messageDiv, typingIndicator);
+            
             this.scrollToBottom();
         }
         
