@@ -402,9 +402,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = this.chatInput.value.trim();
             if (!message || this.isLoading) return;
             
+            // Add user message first
             this.addMessage(message, 'user');
             this.chatInput.value = '';
             this.chatInput.style.height = 'auto';
+            
+            // THEN show typing indicator
             this.showTyping();
             
             try {
