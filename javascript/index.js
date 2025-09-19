@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update copyright year
     updateCopyrightYear();
 
+    // Chat Bot Notification Pointer
+    initializeChatPointer();
+
     // Slideshow functionality
     const slideshowImages = [
         "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 1
@@ -504,3 +507,91 @@ document.addEventListener('DOMContentLoaded', function() {
     window.portfolioChatbot = new PortfolioChatbot();
     console.log('Chatbot setup complete!');
 });
+
+// Chat Pointer Notification JavaScript
+function initializeChatPointer() {
+    const pointerNotification = document.getElementById('chatPointerNotification');
+    let hasScrolled = false;
+    let pointerDismissed = false;
+    
+    if (!pointerNotification) {
+        console.log('Chat pointer notification element not found');
+        return;
+    }
+    
+    // Check if user has already seen the pointer (localStorage)
+    const hasSeenPointer = localStorage.getItem('chatPointerSeen');
+    if (hasSeenPointer) {
+        pointerNotification.style.display = 'none';
+        return;
+    }
+    
+    console.log('Initializing chat pointer notification...');
+    
+    // Function to hide the pointer
+    function hidePointer() {
+        if (pointerDismissed) return;
+        
+        console.log('Hiding chat pointer...');
+        pointerDismissed = true;
+        pointerNotification.classList.add('hidden');
+        
+        // Remember that user has seen it
+        localStorage.setItem('chatPointerSeen', 'true');
+        
+        // Remove from DOM after animation
+        setTimeout(() => {
+            if (pointerNotification.parentNode) {
+                pointerNotification.remove();
+            }
+        }, 500);
+    }
+    
+    // Hide pointer when user scrolls down 300px
+    function handleScroll() {
+        if (hasScrolled || pointerDismissed) return;
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 300) {
+            hasScrolled = true;
+            hidePointer();
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }
+    
+    // Hide pointer when chat is opened
+    function handleChatToggle() {
+        if (pointerDismissed) return;
+        
+        const chatContainer = document.getElementById('chatContainer');
+        if (chatContainer && chatContainer.classList.contains('active')) {
+            hidePointer();
+        }
+    }
+    
+    // Hide pointer when clicking on it
+    pointerNotification.addEventListener('click', hidePointer);
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Add chat toggle listener (check periodically since chat might not exist yet)
+    const checkChatToggle = setInterval(() => {
+        const chatToggle = document.getElementById('chatToggle');
+        if (chatToggle) {
+            chatToggle.addEventListener('click', handleChatToggle);
+            clearInterval(checkChatToggle);
+        }
+    }, 100);
+    
+    // Auto-hide after 15 seconds if user hasn't interacted
+    setTimeout(() => {
+        if (!pointerDismissed && !hasScrolled) {
+            console.log('Auto-hiding pointer after timeout');
+            hidePointer();
+        }
+    }, 15000);
+    
+    console.log('Chat pointer notification initialized successfully');
+}
