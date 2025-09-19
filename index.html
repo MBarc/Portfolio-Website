@@ -735,5 +735,64 @@
         </div>
     </footer>
     <script src="javascript/index.js"></script>
+    <!-- Chat Widget HTML -->
+<div class="chat-widget">
+    <button class="chat-toggle" id="chatToggle">
+        💬
+    </button>
+    
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-info">
+                <h3>Ask about Michael</h3>
+                <p>DevOps Engineer & Software Developer</p>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <strong>Hi! I'm Michael's AI assistant 👋</strong>
+                <p>I can answer questions about Michael's experience, skills, projects, and background. What would you like to know?</p>
+                
+                <div class="suggested-questions">
+                    <button class="suggestion-btn" onclick="sendSuggestion('What is Michael\'s experience with DevOps?')">
+                        What is Michael's experience with DevOps?
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('Tell me about Michael\'s recent projects')">
+                        Tell me about Michael's recent projects
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('What technologies does Michael work with?')">
+                        What technologies does Michael work with?
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('What makes Michael a good candidate?')">
+                        What makes Michael a good candidate?
+                    </button>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="message-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">🤖</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <textarea 
+                class="chat-input" 
+                id="chatInput" 
+                placeholder="Ask me about Michael's experience, skills, or projects..." 
+                rows="1"
+            ></textarea>
+            <button class="send-button" id="sendButton">
+                ➤
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
