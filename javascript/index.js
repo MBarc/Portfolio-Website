@@ -508,7 +508,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Chatbot setup complete!');
 });
 
-// Chat Pointer Notification JavaScript
 function initializeChatPointer() {
     const pointerNotification = document.getElementById('chatPointerNotification');
     let hasScrolled = false;
@@ -547,18 +546,7 @@ function initializeChatPointer() {
         }, 500);
     }
     
-    // Hide pointer when user scrolls down 300px
-    function handleScroll() {
-        if (hasScrolled || pointerDismissed) return;
-        
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 300) {
-            hasScrolled = true;
-            hidePointer();
-            window.removeEventListener('scroll', handleScroll);
-        }
-    }
+    // Removed scroll-based hiding functionality
     
     // Hide pointer when chat is opened
     function handleChatToggle() {
@@ -573,8 +561,7 @@ function initializeChatPointer() {
     // Hide pointer when clicking on it
     pointerNotification.addEventListener('click', hidePointer);
     
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Remove scroll listener (not needed anymore)
     
     // Add chat toggle listener (check periodically since chat might not exist yet)
     const checkChatToggle = setInterval(() => {
@@ -585,13 +572,13 @@ function initializeChatPointer() {
         }
     }, 100);
     
-    // Auto-hide after 15 seconds if user hasn't interacted
+    // Auto-hide after 10 seconds
     setTimeout(() => {
-        if (!pointerDismissed && !hasScrolled) {
-            console.log('Auto-hiding pointer after timeout');
+        if (!pointerDismissed) {
+            console.log('Auto-hiding pointer after 10 seconds');
             hidePointer();
         }
-    }, 15000);
+    }, 10000);
     
     console.log('Chat pointer notification initialized successfully');
 }
