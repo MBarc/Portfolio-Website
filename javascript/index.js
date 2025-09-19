@@ -1,5 +1,4 @@
 console.log('JavaScript file is loading...');
-alert('JavaScript is working!');
 
 // Rest of your existing code here...
 // Initialize all functionality
