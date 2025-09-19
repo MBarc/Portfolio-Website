@@ -300,147 +300,147 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Portfolio Chatbot JavaScript
-class PortfolioChatbot {
-    constructor() {
-        this.chatToggle = document.getElementById('chatToggle');
-        this.chatContainer = document.getElementById('chatContainer');
-        this.chatMessages = document.getElementById('chatMessages');
-        this.chatInput = document.getElementById('chatInput');
-        this.sendButton = document.getElementById('sendButton');
-        this.typingIndicator = document.getElementById('typingIndicator');
-        this.isOpen = false;
-        this.isLoading = false;
-        
-        // Your n8n webhook endpoint - UPDATE THIS TO YOUR ACTUAL ENDPOINT
-        this.webhookUrl = 'https://michaelbarcelo.com/webhook/portfolio-chat';
-        
-        this.init();
-    }
-    
-    init() {
-        this.chatToggle.addEventListener('click', () => this.toggleChat());
-        this.sendButton.addEventListener('click', () => this.sendMessage());
-        this.chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.sendMessage();
-            }
-        });
-        
-        // Auto-resize textarea
-        this.chatInput.addEventListener('input', () => {
-            this.chatInput.style.height = 'auto';
-            this.chatInput.style.height = this.chatInput.scrollHeight + 'px';
-        });
-    }
-    
-    toggleChat() {
-        this.isOpen = !this.isOpen;
-        this.chatContainer.classList.toggle('active', this.isOpen);
-        this.chatToggle.classList.toggle('active', this.isOpen);
-        this.chatToggle.textContent = this.isOpen ? '✕' : '💬';
-        
-        if (this.isOpen) {
-            this.chatInput.focus();
+    class PortfolioChatbot {
+        constructor() {
+            this.chatToggle = document.getElementById('chatToggle');
+            this.chatContainer = document.getElementById('chatContainer');
+            this.chatMessages = document.getElementById('chatMessages');
+            this.chatInput = document.getElementById('chatInput');
+            this.sendButton = document.getElementById('sendButton');
+            this.typingIndicator = document.getElementById('typingIndicator');
+            this.isOpen = false;
+            this.isLoading = false;
+            
+            // Your n8n webhook endpoint - UPDATE THIS TO YOUR ACTUAL ENDPOINT
+            this.webhookUrl = 'https://michaelbarcelo.com/webhook/portfolio-chat';
+            
+            this.init();
         }
-    }
-    
-    async sendMessage() {
-        const message = this.chatInput.value.trim();
-        if (!message || this.isLoading) return;
         
-        this.addMessage(message, 'user');
-        this.chatInput.value = '';
-        this.chatInput.style.height = 'auto';
-        this.showTyping();
-        
-        try {
-            const response = await this.callWebhook(message);
-            this.hideTyping();
-            this.addMessage(response, 'bot');
-        } catch (error) {
-            this.hideTyping();
-            this.addMessage('Sorry, I\'m having trouble connecting right now. Please try again later or contact Michael directly through his LinkedIn.', 'bot');
-            console.error('Chat error:', error);
-        }
-    }
-    
-    async callWebhook(message) {
-        this.isLoading = true;
-        this.sendButton.disabled = true;
-        
-        try {
-            const response = await fetch(this.webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: message,
-                    timestamp: new Date().toISOString()
-                })
+        init() {
+            this.chatToggle.addEventListener('click', () => this.toggleChat());
+            this.sendButton.addEventListener('click', () => this.sendMessage());
+            this.chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.sendMessage();
+                }
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
+            // Auto-resize textarea
+            this.chatInput.addEventListener('input', () => {
+                this.chatInput.style.height = 'auto';
+                this.chatInput.style.height = this.chatInput.scrollHeight + 'px';
+            });
+        }
+        
+        toggleChat() {
+            this.isOpen = !this.isOpen;
+            this.chatContainer.classList.toggle('active', this.isOpen);
+            this.chatToggle.classList.toggle('active', this.isOpen);
+            this.chatToggle.textContent = this.isOpen ? '✕' : '💬';
             
-            const data = await response.json();
-            return data.reply || data.message || 'I received your message but couldn\'t generate a response.';
-        } finally {
-            this.isLoading = false;
-            this.sendButton.disabled = false;
+            if (this.isOpen) {
+                this.chatInput.focus();
+            }
+        }
+        
+        async sendMessage() {
+            const message = this.chatInput.value.trim();
+            if (!message || this.isLoading) return;
+            
+            this.addMessage(message, 'user');
+            this.chatInput.value = '';
+            this.chatInput.style.height = 'auto';
+            this.showTyping();
+            
+            try {
+                const response = await this.callWebhook(message);
+                this.hideTyping();
+                this.addMessage(response, 'bot');
+            } catch (error) {
+                this.hideTyping();
+                this.addMessage('Sorry, I\'m having trouble connecting right now. Please try again later or contact Michael directly through his LinkedIn.', 'bot');
+                console.error('Chat error:', error);
+            }
+        }
+        
+        async callWebhook(message) {
+            this.isLoading = true;
+            this.sendButton.disabled = true;
+            
+            try {
+                const response = await fetch(this.webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.reply || data.message || 'I received your message but couldn\'t generate a response.';
+            } finally {
+                this.isLoading = false;
+                this.sendButton.disabled = false;
+            }
+        }
+        
+        addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const avatar = sender === 'bot' ? '🤖' : '👤';
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">${this.escapeHtml(content)}</div>
+            `;
+            
+            this.chatMessages.appendChild(messageDiv);
+            this.scrollToBottom();
+        }
+        
+        showTyping() {
+            this.typingIndicator.classList.add('active');
+            this.scrollToBottom();
+        }
+        
+        hideTyping() {
+            this.typingIndicator.classList.remove('active');
+        }
+        
+        scrollToBottom() {
+            setTimeout(() => {
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }, 100);
+        }
+        
+        escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
     }
     
-    addMessage(content, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}`;
-        
-        const avatar = sender === 'bot' ? '🤖' : '👤';
-        
-        messageDiv.innerHTML = `
-            <div class="message-avatar">${avatar}</div>
-            <div class="message-content">${this.escapeHtml(content)}</div>
-        `;
-        
-        this.chatMessages.appendChild(messageDiv);
-        this.scrollToBottom();
+    // Global function for suggestion buttons
+    function sendSuggestion(question) {
+        const chatbot = window.portfolioChatbot;
+        if (chatbot) {
+            chatbot.chatInput.value = question;
+            chatbot.sendMessage();
+        }
     }
     
-    showTyping() {
-        this.typingIndicator.classList.add('active');
-        this.scrollToBottom();
-    }
-    
-    hideTyping() {
-        this.typingIndicator.classList.remove('active');
-    }
-    
-    scrollToBottom() {
-        setTimeout(() => {
-            this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
-        }, 100);
-    }
-    
-    escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-}
-
-// Global function for suggestion buttons
-function sendSuggestion(question) {
-    const chatbot = window.portfolioChatbot;
-    if (chatbot) {
-        chatbot.chatInput.value = question;
-        chatbot.sendMessage();
-    }
-}
-
-// Initialize chatbot when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    window.portfolioChatbot = new PortfolioChatbot();
-});
+    // Initialize chatbot when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        window.portfolioChatbot = new PortfolioChatbot();
+    });
 });
