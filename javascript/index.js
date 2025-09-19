@@ -1,3 +1,7 @@
+console.log('JavaScript file is loading...');
+alert('JavaScript is working!');
+
+// Rest of your existing code here...
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing all functionality...');
