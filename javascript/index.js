@@ -419,33 +419,61 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        async callWebhook(message) {
-            this.isLoading = true;
-            this.sendButton.disabled = true;
-            
-            try {
-                const response = await fetch(this.webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        timestamp: new Date().toISOString()
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                const data = await response.json();
-                return data.reply || data.message || 'I received your message but couldn\'t generate a response.';
-            } finally {
-                this.isLoading = false;
-                this.sendButton.disabled = false;
-            }
+async callWebhook(message) {
+    this.isLoading = true;
+    this.sendButton.disabled = true;
+    
+    const payload = {
+        message: message,
+        timestamp: new Date().toISOString()
+    };
+    
+    console.log('=== WEBHOOK DEBUG INFO ===');
+    console.log('Sending to URL:', this.webhookUrl);
+    console.log('Payload:', JSON.stringify(payload, null, 2));
+    console.log('Message content:', message);
+    
+    try {
+        const response = await fetch(this.webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        console.log('Response status:', response.status);
+        console.log('Response headers:', [...response.headers.entries()]);
+        
+        const responseText = await response.text();
+        console.log('Raw response text:', responseText);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${responseText}`);
         }
+        
+        let data;
+        try {
+            data = JSON.parse(responseText);
+            console.log('Parsed response data:', data);
+        } catch (e) {
+            console.error('JSON parse error:', e);
+            console.error('Response was:', responseText);
+            return 'I received your message but got an invalid response format.';
+        }
+        
+        return data.reply || data.message || 'I received your message but couldn\'t generate a response.';
+    } catch (error) {
+        console.error('=== FETCH ERROR ===');
+        console.error('Error details:', error);
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+        throw error;
+    } finally {
+        this.isLoading = false;
+        this.sendButton.disabled = false;
+    }
+}
         
         addMessage(content, sender) {
             const messageDiv = document.createElement('div');
@@ -453,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const avatar = sender === 'bot' ? '🤖' : '👤';
             
-            messageDiv.innerHTML = `
+            messageDiv.innerHTML = 
                 <div class="message-avatar">${avatar}</div>
                 <div class="message-content">${this.escapeHtml(content)}</div>
             `;
