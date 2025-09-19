@@ -481,7 +481,7 @@ async callWebhook(message) {
             
             const avatar = sender === 'bot' ? '🤖' : '👤';
             
-            messageDiv.innerHTML = 
+            messageDiv.innerHTML = `
                 <div class="message-avatar">${avatar}</div>
                 <div class="message-content">${this.escapeHtml(content)}</div>
             `;
