@@ -2077,15 +2077,30 @@ nav {
     align-items: center;
     gap: 10px;
     margin-bottom: 16px;
+    padding: 0 10px; /* Add padding to match messages */
 }
 
 .typing-indicator.active {
     display: flex;
 }
 
+.typing-indicator .message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
 .typing-dots {
     display: flex;
     gap: 4px;
+    align-items: center; /* Ensure dots are centered */
 }
 
 .typing-dot {
