@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.isLoading = false;
             
             // Your n8n webhook endpoint
-            this.webhookUrl = 'https://michaelbarcelo.com/webhook/portfolio-chat';
+            this.webhookUrl = 'https://n8n.michaelbarcelo.com/webhook/portfolio-chat-bot';
             
             if (this.chatToggle && this.chatContainer) {
                 this.init();
