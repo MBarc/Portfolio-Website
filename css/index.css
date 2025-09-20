@@ -2317,4 +2317,32 @@ nav {
         width: 30px;
         height: 30px;
     }
+        .chat-container {
+        width: calc(100vw - 20px); /* Full width minus margins */
+        height: 400px;
+        bottom: 85px;
+        right: 10px;
+        left: 10px; /* Add left positioning to center it */
+        position: fixed; /* Ensure it's fixed positioned */
+    }
+    
+    .chat-widget {
+        right: 10px; /* Move the chat button closer to edge */
+    }
+    
+    .chat-toggle {
+        width: 50px; /* Slightly smaller on mobile */
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        width: calc(100vw - 40px); /* Leave some margin on tablets */
+        height: 450px;
+        bottom: 90px;
+        right: 20px;
+        left: 20px;
+    }
 }
