@@ -436,41 +436,29 @@ async callWebhook(message) {
     console.log('Message content:', message);
     
     try {
-        const response = await fetch(this.webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-        });
-        
-        console.log('Response status:', response.status);
-        console.log('Response headers:', [...response.headers.entries()]);
-        
-        const responseText = await response.text();
-        console.log('Raw response text:', responseText);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${responseText}`);
-        }
-        
-        let data;
-        try {
-            data = JSON.parse(responseText);
-            console.log('Parsed response data:', data);
-        } catch (e) {
-            console.error('JSON parse error:', e);
-            console.error('Response was:', responseText);
-            return 'I received your message but got an invalid response format.';
-        }
-        
-        return data.reply || data.message || 'I received your message but couldn\'t generate a response.';
-    } catch (error) {
-        console.error('=== FETCH ERROR ===');
-        console.error('Error details:', error);
-        console.error('Error message:', error.message);
-        console.error('Error stack:', error.stack);
-        throw error;
+    const response = await fetch(this.webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    });
+    
+    console.log('Response status:', response.status);
+    
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+    
+    const data = await response.json();  // Much cleaner!
+    console.log('Parsed data:', data);
+    
+    return data.reply || data.output || data.message || 'I received your message but couldn\'t generate a response.';
+    
+} catch (error) {
+    console.error('Error:', error);
+    throw error;
     } finally {
         this.isLoading = false;
         this.sendButton.disabled = false;
