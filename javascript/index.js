@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Slideshow functionality
     const slideshowImages = [
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 1
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 2 - Replace with your second image URL
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/profilePic.jpg?raw=true", // Image 1
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/alex%2Bmichael.jpg?raw=true", // Image 2 - Replace with your second image URL
         "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 3 - Replace with your third image URL
         "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 4 - Replace with your fourth image URL
         "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 5 - Replace with your fifth image URL
