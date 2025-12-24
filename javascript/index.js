@@ -430,35 +430,49 @@ async callWebhook(message) {
         timestamp: new Date().toISOString()
     };
     
-    console.log('=== WEBHOOK DEBUG INFO ===');
-    console.log('Sending to URL:', this.webhookUrl);
-    console.log('Payload:', JSON.stringify(payload, null, 2));
-    console.log('Message content:', message);
-    
     try {
-    const response = await fetch(this.webhookUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-    });
-    
-    console.log('Response status:', response.status);
-    
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`HTTP ${response.status}: ${errorText}`);
-    }
-    
-    const data = await response.json();  // Much cleaner!
-    console.log('Parsed data:', data);
-    
-    return data.reply || data.output || data.message || 'I received your message but couldn\'t generate a response.';
-    
-} catch (error) {
-    console.error('Error:', error);
-    throw error;
+        const response = await fetch(this.webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
+        // Get raw text to see what we actually received
+        const responseText = await response.text();
+        console.log('Raw response length:', responseText.length);
+        console.log('Raw response:', responseText);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${responseText}`);
+        }
+        
+        // Check if response is empty
+        if (!responseText || responseText.trim() === '') {
+            console.error('Empty response from n8n!');
+            throw new Error('Empty response from server');
+        }
+        
+        // Try to parse JSON
+        let data;
+        try {
+            data = JSON.parse(responseText);
+            console.log('Parsed data:', data);
+        } catch (e) {
+            console.error('JSON parse failed');
+            console.error('Response was:', responseText);
+            throw new Error('Invalid JSON response: ' + e.message);
+        }
+        
+        return data.output || data.reply || data.message || 'No response content found.';
+        
+    } catch (error) {
+        console.error('Webhook error:', error);
+        throw error;
     } finally {
         this.isLoading = false;
         this.sendButton.disabled = false;
