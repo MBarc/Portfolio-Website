@@ -446,6 +446,8 @@ async callWebhook(message) {
         timestamp: new Date().toISOString(),
         sessionid: this.sessionId
     };
+
+    console.log('Webhook payload being sent to:', payload);
     
     try {
         const response = await fetch(this.webhookUrl, {
