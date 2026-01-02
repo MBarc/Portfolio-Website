@@ -1,9 +1,25 @@
 console.log('JavaScript file is loading...');
 
+// Utility helpers (no DOM dependencies)
+function generateUUID() {
+    if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 // Rest of your existing code here...
 // Initialize all functionality
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing all functionality...');
+
+    const sessionId = generateUUID();
+    console.log('Session ID:', sessionId);
     
     // Calculate years of experience dynamically
     function calculateYearsExperience() {
@@ -427,7 +443,8 @@ async callWebhook(message) {
     
     const payload = {
         message: message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        sessionid: this.sessionId
     };
     
     try {
