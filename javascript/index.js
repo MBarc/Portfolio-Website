@@ -44,16 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Slideshow functionality
     const slideshowImages = [
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/profilePic.jpg?raw=true", // Image 1
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/alex%2Bmichael.jpg?raw=true", // Image 2 - Replace with your second image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 3 - Replace with your third image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 4 - Replace with your fourth image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 5 - Replace with your fifth image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 6 - Replace with your sixth image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 7 - Replace with your seventh image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 8 - Replace with your eighth image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true", // Image 9 - Replace with your ninth image URL
-        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true"  // Image 10 - Replace with your tenth image URL
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/MeWithHireMeSign.png?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/profilePic.jpg?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/alex%2Bmichael.jpg?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/MeFishing.png?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/MeAtMyWorkstation.png?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/LeoAndI.png?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/MeScubaDiving.png?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/Michael_Barcelo_Profile_Picture.jpg?raw=true",
+        "https://github.com/MBarc/Portfolio-Website/blob/main/pictures/MeSkydiving.png?raw=true"
     ];
     
     let currentSlideIndex = 0;
